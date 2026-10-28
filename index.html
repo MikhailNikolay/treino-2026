@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<title>Treino 2026</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--line:#334155;--txt:#e2e8f0;--mut:#94a3b8;--acc:#22c55e;--acc2:#38bdf8;--warn:#f59e0b;--bad:#ef4444;--r:14px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 16px 10px;border-bottom:1px solid #1f2a3d;display:flex;justify-content:space-between;align-items:center}
+header b{font-size:17px}
+#saved{font-size:13px;color:var(--acc);opacity:0;transition:opacity .3s}
+#saved.on{opacity:1}
+main{padding:12px 12px 150px;max-width:640px;margin:0 auto}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:#0b1222;border-top:1px solid #1f2a3d;padding-bottom:env(safe-area-inset-bottom);z-index:6}
+nav button{flex:1;background:none;border:0;color:var(--mut);padding:8px 0 8px;font-size:12px;cursor:pointer}
+nav button span{display:block;font-size:20px;line-height:1.3}
+nav button.on{color:var(--acc)}
+.card{background:var(--card);border-radius:var(--r);padding:14px;margin-bottom:12px}
+h2{font-size:18px;margin:0 0 4px}
+h3{font-size:16px;margin:14px 0 6px}
+p{margin:6px 0}
+.mut{color:var(--mut);font-size:14px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.between{justify-content:space-between}
+label{display:block;font-size:13px;color:var(--mut)}
+input,textarea,select{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:16px;width:100%;font-family:inherit}
+textarea{min-height:70px;resize:vertical;margin-top:8px}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--acc2);border-color:transparent}
+input::placeholder,textarea::placeholder{color:#64748b}
+.sets{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:6px;margin-top:8px}
+.sets label{text-align:center;font-size:11px}
+.sets input{text-align:center;padding:10px 2px;margin-top:2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid2 input{margin-top:3px}
+.btn{background:var(--card2);color:var(--txt);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font-size:15px;cursor:pointer;font-family:inherit}
+.btn.pri{background:var(--acc);color:#052e16;border:0;font-weight:600}
+.btn.sm{padding:6px 11px;font-size:13px}
+.btn.full{width:100%}
+.btn.danger{border-color:#7f1d1d;color:#fca5a5}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.chip{min-width:38px;padding:8px 10px;border-radius:999px;background:var(--card2);border:1px solid var(--line);color:var(--txt);font-size:14px;cursor:pointer;font-family:inherit}
+.chip.on{background:var(--acc2);color:#082f49;border-color:transparent;font-weight:700}
+.ex{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+.exname{font-weight:600;cursor:pointer}
+.dica{display:none;font-size:14px;color:#cbd5e1;margin-top:6px;background:#172033;padding:10px;border-radius:8px}
+.ex.open .dica{display:block}
+.tag{display:inline-block;font-size:12px;padding:3px 9px;border-radius:999px;background:var(--line);color:var(--txt)}
+.tag.ok{background:#14532d;color:#bbf7d0}
+.tag.warn{background:#78350f;color:#fde68a}
+.banner{background:#1e3a5f;border-radius:var(--r);padding:12px 14px;margin-bottom:12px;font-size:15px}
+.banner.warn{background:#451a03}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{padding:7px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:600}
+.day{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.day.today{background:#172b45;border-radius:8px}
+.day .r{text-align:right;font-size:14px;white-space:nowrap}
+.big{font-size:26px;font-weight:700}
+.stat{background:var(--card2);border-radius:10px;padding:10px;text-align:center}
+.stat .mut{font-size:12px}
+svg{width:100%;height:auto;display:block}
+svg text{fill:var(--mut);font-size:10px;font-family:inherit}
+#timer{position:fixed;left:10px;right:10px;bottom:70px;max-width:620px;margin:0 auto;background:#0c4a6e;border-radius:16px;padding:12px 14px;z-index:7;display:none;box-shadow:0 8px 30px #0009}
+#timer.hard{background:#7f1d1d}
+#ttime{font-size:44px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+#timer .btn{background:#ffffff1f;border-color:#ffffff33}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#334155;padding:10px 16px;border-radius:999px;font-size:14px;opacity:0;transition:opacity .3s;z-index:8;pointer-events:none}
+#toast.on{opacity:1}
+ul{margin:6px 0;padding-left:20px}
+li{margin:3px 0}
+</style>
+</head>
+<body>
+<header><b>🏃 Treino 2026</b><span id="saved">salvo ✓</span></header>
+<main></main>
+<div id="timer">
+  <div class="row between"><div id="tlabel" style="font-weight:600"></div><div id="tnext" class="mut"></div></div>
+  <div id="ttime">0:00</div>
+  <div class="row"><button class="btn sm" id="tpause">⏸ Pausar</button><button class="btn sm" id="tplus">+15 s</button><button class="btn sm" id="tskip">Pular ⏭</button><button class="btn sm" id="tstop">■ Parar</button></div>
+</div>
+<div id="toast"></div>
+<nav>
+  <button data-tab="hoje"><span>📅</span>Hoje</button>
+  <button data-tab="semana"><span>🗓️</span>Semana</button>
+  <button data-tab="prog"><span>📈</span>Progresso</button>
+  <button data-tab="plano"><span>📋</span>Plano</button>
+  <button data-tab="mais"><span>⚙️</span>Mais</button>
+</nav>
+<input type="file" id="impfile" accept=".json,application/json" style="display:none">
+<script>
+const KEY = 'treino2026_v1';
+const DEFAULT_START = '2026-11-02';
+const WEEKS = 8;
+const DIAS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const DIAS_C = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+const EX = {
+  A: {nome: 'Pernas e core', ex: [
+    {id:'agach', n:'Agachamento taça (mochila no peito)', s:3, min:12, max:15, d:60, dica:'Mochila abraçada no peito, pés na largura dos ombros. Desce até a coxa passar da linha do joelho, tronco alto, joelhos acompanhando a ponta dos pés.', prog:'Mais peso na mochila → pausa de 2 s embaixo.'},
+    {id:'bulgaro', n:'Agachamento búlgaro', s:3, min:8, max:12, cada:1, d:60, dica:'Pé de trás apoiado na cadeira, desce o joelho de trás em direção ao chão. Tronco um pouco inclinado à frente pega mais glúteo.', prog:'Sem peso → com mochila.'},
+    {id:'ponteU', n:'Ponte de glúteo unilateral', s:3, min:10, max:15, cada:1, d:45, dica:'Uma perna no ar, empurra o calcanhar de apoio e sobe o quadril até alinhar com o tronco. Aperta o glúteo 1 s em cima.', prog:'Bilateral → unilateral → ombros apoiados na cadeira.'},
+    {id:'stiff', n:'Stiff unilateral com mochila', s:3, min:10, max:12, cada:1, d:45, dica:'Joelho de apoio levemente dobrado, leva o quadril para trás com a coluna neutra até alongar o posterior. A outra perna sobe para trás.', prog:'Com apoio na parede → sem apoio.'},
+    {id:'pantU', n:'Panturrilha unilateral no degrau', s:3, min:12, max:20, cada:1, d:30, dica:'Ponta do pé no degrau, desce o calcanhar o máximo e sobe na ponta. Pausa de 1-2 s em cima e embaixo.', prog:'Pausas mais longas → mochila nas costas.'},
+    {id:'prancha', n:'Prancha frontal', s:3, min:30, max:60, u:'s', d:30, dica:'Cotovelos embaixo dos ombros, glúteo e abdômen contraídos, quadril sem cair nem empinar.', prog:'Mais tempo → elevar um pé.'}
+  ]},
+  B: {nome: 'Parte de cima', ex: [
+    {id:'flexao', n:'Flexão de braço', s:4, min:6, max:15, d:60, dica:'Mãos um pouco além da largura dos ombros, corpo em linha reta, peito quase encosta. Se não fizer 6 no chão, comece inclinado na mesa.', prog:'Inclinada na mesa → no chão → pés na cadeira.'},
+    {id:'remInv', n:'Remada invertida embaixo da mesa', s:4, min:6, max:12, d:60, dica:'Deitado embaixo de uma mesa FIRME, segura a borda e puxa o peito até ela com o corpo reto. Teste se a mesa aguenta antes!', prog:'Joelhos dobrados → pernas esticadas.'},
+    {id:'pike', n:'Flexão pike (ombro)', s:3, min:6, max:12, d:60, dica:'Quadril alto, corpo em V invertido. Desce a cabeça em direção ao chão, um pouco à frente das mãos.', prog:'Pés no chão → pés na cadeira.'},
+    {id:'remU', n:'Remada unilateral com mochila', s:3, min:10, max:15, cada:1, d:45, dica:'Mão e joelho apoiados na cadeira, puxa a mochila até o quadril com o cotovelo junto ao corpo.', prog:'Mais peso na mochila.'},
+    {id:'mergulho', n:'Mergulho na cadeira', s:3, min:8, max:15, d:45, dica:'Mãos na borda da cadeira, desce até o cotovelo ficar em ~90°, ombros longe das orelhas. Se o ombro reclamar, diminua a amplitude.', prog:'Joelhos dobrados → pernas esticadas.'},
+    {id:'ytw', n:'Y-T-W deitado de bruços', s:2, min:8, max:8, nota:'de cada letra', d:30, dica:'De bruços, testa numa toalha. Levanta os braços formando Y, depois T, depois W, apertando as escápulas.', prog:'Pausa de 2 s em cada posição.'},
+    {id:'hollow', n:'Hollow hold (canoinha)', s:3, min:20, max:40, u:'s', d:30, dica:'Lombar colada no chão, ombros e pernas um pouco elevados. Joelhos dobrados deixam mais fácil.', prog:'Joelhos dobrados → pernas esticadas.'}
+  ]},
+  C: {nome: 'Pernas de corredor', ex: [
+    {id:'afundo', n:'Afundo reverso com mochila', s:3, min:10, max:12, cada:1, d:60, dica:'Passo para trás, desce o joelho de trás perto do chão e volta empurrando com o calcanhar da frente.', prog:'Mais peso na mochila.'},
+    {id:'subida', n:'Subida no degrau/cadeira', s:3, min:10, max:10, cada:1, d:60, dica:'Pé inteiro em cima, sobe empurrando com a perna de cima sem dar impulso com a de baixo.', prog:'Degrau mais alto → com mochila.'},
+    {id:'ponteP', n:'Ponte de glúteo com pausa de 3 s', s:3, min:12, max:15, d:45, dica:'Ponte com as duas pernas, segura 3 s em cima apertando o glúteo.', prog:'Bilateral → unilateral.'},
+    {id:'soleo', n:'Panturrilha com joelho dobrado (sóleo)', s:3, min:15, max:20, d:30, dica:'Sentado com joelhos a 90° e a mochila sobre as coxas (ou em pé com joelhos dobrados), sobe na ponta dos pés. Essencial pra quem corre.', prog:'Mais peso na mochila.'},
+    {id:'tibial', n:'Tibial na parede', s:2, min:15, max:20, d:30, dica:'Costas na parede, calcanhares uns 30 cm à frente. Levanta as pontas dos pés o máximo e desce devagar. Ajuda a prevenir canelite.', prog:'Mais lento → pausa em cima.'},
+    {id:'deadbug', n:'Dead bug', s:3, min:8, max:8, cada:1, d:30, dica:'Deitado, braços pra cima e joelhos a 90°. Estende braço e perna opostos sem tirar a lombar do chão.', prog:'Braços e pernas mais esticados.'}
+  ]},
+  D: {nome: 'Parte de cima + core (circuito)', circ:1, d:90, ex: [
+    ['Flexão de braço','8-12'], ['Remada invertida ou com mochila','10-12'], ['Flexão pike','6-10'], ['Mergulho na cadeira','8-12'],
+    ['Prancha com toque no ombro','10 cada lado'], ['Prancha lateral','20-30 s cada lado'], ['Abdominal bicicleta','20 no total'], ['Superman','10']
+  ]}
+};
+const EXMAP = {};
+for (const L of 'ABC') for (const e of EX[L].ex) EXMAP[e.id] = {...e, L};
+
+const DAYMAP = {1:{f:'A',r:'curta'}, 2:{f:'B',r:'media'}, 3:{r:'qua'}, 4:{f:'C',r:'curta'}, 5:{f:'D',r:'media'}, 6:{r:'sab'}, 0:{r:'rec'}};
+// Minutos correndo por bloco; entre os blocos, bike enquanto o amigo corre.
+const CORRIDA = [
+  {curta:[4,4,4],  media:[4,4,4,4], qua:{leve:[4,4,4,4]}, sab:[8,4,4]},
+  {curta:[5,5,5],  media:[5,5,5,5], qua:{leve:[5,5,5,5]}, sab:[10,4,4]},
+  {curta:[6,6,6],  media:[6,6,6,6], qua:{aq:5, n:6, t:1}, sab:[12,6]},
+  {curta:[7,7,7],  media:[8,8,8],   qua:{aq:5, n:8, t:1}, sab:[15,5]},
+  {curta:[10,10],  media:[9,9,9],   qua:{aq:5, n:5, t:2}, sab:[18]},
+  {curta:[6,6],    media:[6,6,6],   qua:{aq:5, n:4, t:1}, sab:[12]},
+  {curta:[12,12],  media:[14,14],   qua:{aq:5, n:5, t:3}, sab:[22]},
+  {curta:[14,14],  media:[16,16],   qua:{aq:5, n:6, t:3}, sab:[28]}
+];
+
+let db = load();
+const today = () => iso(new Date());
+const st = {tab:'hoje', date: today(), week: null, exHist: 'agach'};
+
+function load() {
+  let d = {};
+  try { d = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+  d.days = d.days || {}; d.weekly = d.weekly || {}; d.settings = d.settings || {};
+  if (!d.settings.start) d.settings.start = DEFAULT_START;
+  return d;
+}
+let saveT;
+function save() {
+  clearTimeout(saveT);
+  saveT = setTimeout(() => {
+    try { localStorage.setItem(KEY, JSON.stringify(db)); flash('#saved'); }
+    catch (e) { toast('⚠️ Não consegui salvar neste navegador. Faça um backup em Mais.'); }
+  }, 250);
+}
+function flash(sel) { const e = el(sel); e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('on'), 1200); }
+function toast(msg) { const t = el('#toast'); t.textContent = msg; flash('#toast'); }
+const el = s => document.querySelector(s);
+const esc = v => String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const num = v => parseFloat(String(v ?? '').replace(',', '.'));
+const fmt = v => (Math.round(v * 10) / 10).toString().replace('.', ',');
+
+function pad(n) { return String(n).padStart(2, '0'); }
+function iso(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+function pd(s) { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); }
+function add(s, n) { const d = pd(s); d.setDate(d.getDate() + n); return iso(d); }
+function diff(a, b) { return Math.round((pd(b) - pd(a)) / 864e5); }
+function br(s) { const d = pd(s); return pad(d.getDate()) + '/' + pad(d.getMonth() + 1); }
+function wkOf(s) { const n = diff(db.settings.start, s); return n < 0 ? 0 : Math.floor(n / 7) + 1; }
+const wd = s => pd(s).getDay();
+function weekDates(w) { const b = add(db.settings.start, (w - 1) * 7); return [0,1,2,3,4,5,6].map(i => add(b, i)); }
+function sundayOf(w) { return add(db.settings.start, 7 * w - 1); }
+const cw = w => Math.min(Math.max(w, 1), WEEKS);
+
+function get(p) { return p.split('.').reduce((o, k) => o == null ? undefined : o[k], db); }
+function set(p, v) {
+  const ks = p.split('.'); let o = db;
+  for (let i = 0; i < ks.length - 1; i++) o = o[ks[i]] ?? (o[ks[i]] = {});
+  if (v === '' || v == null) delete o[ks[ks.length - 1]]; else o[ks[ks.length - 1]] = v;
+  save();
+}
+const val = p => esc(get(p) ?? '');
+function prev(d, sub) {
+  for (let k = 1; k <= WEEKS; k++) { const v = get(`days.${add(d, -7 * k)}.${sub}`); if (v != null && v !== '') return v; }
+  return '';
+}
+
+function blocksText(b) {
+  const g = [];
+  for (const m of b) { const last = g[g.length - 1]; if (last && last.m === m) last.n++; else g.push({m, n: 1}); }
+  return g.map((x, i) => `${x.n} bloco${x.n > 1 ? 's' : ''} de ${x.m} min`).join(' + ');
+}
+const LEVE = ' Ritmo de conversa (Borg 4-5): troque com o amigo quando ainda daria pra correr mais um pouco, não quando estiver morto.';
+function runPlan(type, w) {
+  if (type === 'rec') return {nome:'Sem corrida — bike leve ou caminhada', min:0, blocks:[], det:'30-40 min de bike leve ou caminhada, ou folga. Esse dia sem impacto dá tempo pra canela, joelho e tendões se adaptarem à corrida.'};
+  const c = CORRIDA[cw(w) - 1];
+  if (type === 'qua' && !c.qua.leve) {
+    const q = c.qua, blocks = [q.aq, ...Array(q.n).fill(q.t)];
+    return {nome:'Blocos firmes', min: blocks.reduce((a, b) => a + b, 0), blocks, firm: 1,
+      det:`1 bloco de ${q.aq} min leve pra aquecer, depois ${q.n} blocos de ${q.t} min em ritmo firme (Borg 7), revezando com a bike. Na bike, pedale leve pra recuperar. Coma algo leve antes se estiver em jejum.`};
+  }
+  const blocks = type === 'qua' ? c.qua.leve : c[type];
+  const min = blocks.reduce((a, b) => a + b, 0);
+  if (type === 'sab') return {nome:'Bloco longo', min, blocks, det:`O foco de hoje é o primeiro bloco: ${blocks[0]} min correndo sem parar${blocks.length > 1 ? ', depois ' + blocksText(blocks.slice(1)) : ''}. Vá devagar — o objetivo é aguentar o tempo, não ser rápido.` + (cw(w) === 8 ? ' Semana 8: tente fazer 4 km!' : '')};
+  return {nome:'Revezamento leve', min, blocks, det: blocksText(blocks) + ' correndo, revezando com a bike.' + LEVE};
+}
+const runTargetWeek = w => weekDates(w).reduce((s, d) => s + runPlan(DAYMAP[wd(d)].r, w).min, 0);
+const nSets = (ex, w) => cw(w) === 6 ? Math.max(1, ex.s - 1) : ex.s;
+const voltas = w => { const c = cw(w); return (c <= 2 || c === 6) ? 3 : 4; };
+const borgMeta = w => { const c = cw(w); return c <= 2 ? '6-7' : c <= 5 ? '7-8' : c === 6 ? '6' : '8'; };
+const range = ex => (ex.min === ex.max ? ex.min : ex.min + '-' + ex.max) + (ex.u === 's' ? ' s' : '') + (ex.cada ? ' cada lado' : '') + (ex.nota ? ' ' + ex.nota : '');
+
+function forcaFeita(d) {
+  const r = db.days[d], p = DAYMAP[wd(d)];
+  if (!r || !p.f) return false;
+  if (r.fdone) return true;
+  if (p.f === 'D') return !!r.voltas;
+  return !!r.sets && Object.values(r.sets).some(o => Object.values(o).some(v => v !== ''));
+}
+function runMin(d) { const v = num(get(`days.${d}.run.min`)); return isNaN(v) ? 0 : v; }
+const runWeek = w => weekDates(w).reduce((s, d) => s + runMin(d), 0);
+const forcaWeek = w => weekDates(w).filter(forcaFeita).length;
+
+function chips(path, vals) {
+  const cur = String(get(path) ?? '');
+  return `<div class="chips">${vals.map(v => `<button class="chip ${cur === String(v) ? 'on' : ''}" data-chip="${path}" data-v="${v}">${v}</button>`).join('')}</div>`;
+}
+function inp(path, label, ph = '') {
+  return `<label>${label}<input type="text" inputmode="decimal" data-p="${path}" value="${val(path)}" placeholder="${esc(ph)}"></label>`;
+}
+
+function topTag(d, ex, w) {
+  const n = nSets(ex, w); let any = false, top = true;
+  for (let i = 0; i < n; i++) { const x = num(get(`days.${d}.sets.${ex.id}.${i}`)); if (isNaN(x)) top = false; else { any = true; if (x < ex.max) top = false; } }
+  return any && top ? '<span class="tag ok">bateu o topo → progrida no próximo</span>' : '';
+}
+
+function backupBanner() {
+  const n = Object.keys(db.days).length;
+  const last = db.lastExport;
+  if (n < 3 || (last && diff(last, today()) < 7)) return '';
+  return `<div class="banner warn">💾 ${last ? 'Último backup em ' + br(last) + '.' : 'Você ainda não fez backup.'} Os dados ficam só neste navegador — salve uma cópia de vez em quando.<div style="margin-top:8px"><button class="btn sm pri" data-act="export">Fazer backup agora</button></div></div>`;
+}
+
+function cardMedidas(w) {
+  const b = `weekly.${w}`;
+  const auto = w > 0 ? `<div class="row" style="margin:8px 0"><span class="tag">${fmt(runWeek(w))} min corridos (meta ${runTargetWeek(w)})</span><span class="tag">${forcaWeek(w)}/4 treinos de força</span></div>` : '';
+  return `<div class="card"><h2>⚖️ ${w === 0 ? 'Medição inicial' : 'Pesagem da semana ' + w}</h2>
+    <div class="mut">Em jejum, depois do banheiro. Cintura na altura do umbigo.</div>${auto}
+    <div class="grid2" style="margin-top:8px">${inp(b + '.peso', 'Peso (kg)')}${inp(b + '.cintura', 'Cintura (cm)')}${inp(b + '.quadril', 'Quadril (cm)')}${inp(b + '.sono', 'Sono médio (h)')}</div>
+    ${w > 0 ? `<div class="mut" style="margin-top:10px">Alimentação na semana (1 = ruim, 5 = ótima)</div>${chips(b + '.alim', [1,2,3,4,5])}` : ''}
+    <textarea data-p="${b}.obs" placeholder="Observações (dor, cansaço, o que deu certo...)">${val(b + '.obs')}</textarea></div>`;
+}
+
+function vHoje() {
+  const d = st.date, w = wkOf(d), p = DAYMAP[wd(d)], isToday = d === today();
+  let h = `<div class="card"><div class="row between">
+      <button class="btn sm" data-go="-1">‹</button>
+      <div style="text-align:center"><div style="font-size:19px;font-weight:700">${isToday ? 'Hoje · ' : ''}${DIAS[wd(d)]}, ${br(d)}</div>
+      <div class="mut">${w === 0 ? 'Antes do início do programa' : w > WEEKS ? 'Depois das 8 semanas' : 'Semana ' + w + ' de ' + WEEKS + (w === 6 ? ' · semana leve' : '')}</div></div>
+      <button class="btn sm" data-go="1">›</button></div>
+      ${isToday ? '' : '<div style="text-align:center;margin-top:8px"><button class="btn sm" data-go="0">Voltar para hoje</button></div>'}</div>`;
+  h += backupBanner();
+
+  if (w === 0) {
+    const falta = diff(d, db.settings.start);
+    h += `<div class="banner">O programa começa na segunda, <b>${br(db.settings.start)}</b> (falta${falta > 1 ? 'm' : ''} ${falta} dia${falta > 1 ? 's' : ''}). Antes disso, faça a medição inicial abaixo. Dá pra mudar a data de início na aba <b>Mais</b>.
+      <div style="margin-top:8px"><button class="btn sm" data-date="${db.settings.start}">Ver o primeiro dia</button></div></div>`;
+    return h + cardMedidas(0);
+  }
+  if (w > WEEKS) h += `<div class="banner">🎉 As 8 semanas acabaram! Os alvos abaixo são os da semana 8. Hora de montar um novo ciclo.</div>`;
+
+  const rec = db.days[d] || {};
+  if (p.f) {
+    const W = EX[p.f];
+    h += `<div class="card"><h2>💪 Treino ${p.f} — ${W.nome}</h2>
+      <div class="mut">Esforço alvo: Borg ${borgMeta(w)}${p.f === 'A' || p.f === 'C' ? ' · faça antes da corrida (ou em outro horário)' : ''}.${W.circ ? '' : ' Toque no nome do exercício para ver como fazer. Os números cinza são da semana passada.'}</div>`;
+    if (W.circ) {
+      h += `<p class="mut" style="margin-top:10px"><b>${voltas(w)} voltas</b>, exercícios em sequência, ${W.d} s de descanso no fim de cada volta. Sem saltos.</p>
+        <table>${W.ex.map(([n, r]) => `<tr><td>${n}</td><td style="text-align:right;white-space:nowrap">${r}</td></tr>`).join('')}</table>
+        <div class="grid2" style="margin-top:10px">${inp(`days.${d}.voltas`, 'Voltas feitas', prev(d, 'voltas') || voltas(w))}${inp(`days.${d}.tempo`, 'Tempo total (min)', prev(d, 'tempo'))}</div>
+        <div style="margin-top:8px"><button class="btn sm" data-timer="${W.d}">⏱ Descanso ${W.d} s</button></div>`;
+    } else {
+      for (const ex of W.ex) {
+        const n = nSets(ex, w), sp = `days.${d}.sets.${ex.id}`;
+        let cells = '';
+        for (let i = 0; i < n; i++) cells += `<label>S${i + 1}${ex.u === 's' ? ' (s)' : ''}<input type="text" inputmode="decimal" data-p="${sp}.${i}" data-ex="${ex.id}" value="${val(sp + '.' + i)}" placeholder="${esc(prev(d, 'sets.' + ex.id + '.' + i))}"></label>`;
+        if (ex.u !== 's') cells += `<label>Kg<input type="text" inputmode="decimal" data-p="days.${d}.kg.${ex.id}" value="${val(`days.${d}.kg.${ex.id}`)}" placeholder="${esc(prev(d, 'kg.' + ex.id))}"></label>`;
+        h += `<div class="ex" id="ex-${ex.id}">
+          <div class="row between"><span class="exname" data-tog="${ex.id}">${ex.n} <span class="mut">ⓘ</span></span><span class="toptag">${topTag(d, ex, w)}</span></div>
+          <div class="mut">${n} × ${range(ex)} · descanso ${ex.d} s</div>
+          <div class="dica">${ex.dica}<br><b>Progressão:</b> ${ex.prog}</div>
+          <input type="text" style="margin-top:8px" data-p="days.${d}.var.${ex.id}" value="${val(`days.${d}.var.${ex.id}`)}" placeholder="Variação usada${prev(d, 'var.' + ex.id) ? ' (antes: ' + esc(prev(d, 'var.' + ex.id)) + ')' : ' (opcional)'}">
+          <div class="sets">${cells}</div>
+          <div style="margin-top:8px"><button class="btn sm" data-timer="${ex.d}">⏱ Descanso ${ex.d} s</button></div></div>`;
+      }
+    }
+    h += `<div class="mut" style="margin-top:14px">Esforço do treino de força (Borg)</div>${chips(`days.${d}.borgF`, [1,2,3,4,5,6,7,8,9,10])}</div>`;
+  }
+
+  const r = runPlan(p.r, w);
+  if (p.r === 'rec') {
+    h += `<div class="card"><h2>🚲 ${r.nome}</h2><div class="mut">${r.det}</div>
+      <div style="margin-top:10px">${inp(`days.${d}.alt`, 'Minutos de bike/caminhada', '30-40')}</div></div>`;
+  } else {
+    h += `<div class="card"><h2>🏃 ${r.nome} — ${r.min} min correndo</h2><div class="mut">${r.det}</div>
+      <div style="margin-top:10px"><button class="btn pri" data-blocks="${r.blocks.join(',')}" data-firm="${r.firm || 0}">▶ Timer do revezamento</button></div>
+      <div class="mut" style="margin-top:6px;font-size:12px">O timer conta sua vez e a vez do amigo (mesmo tempo). Se ele terminar antes ou depois, use "Pular".</div>
+      <div class="grid2" style="margin-top:10px">${inp(`days.${d}.run.min`, 'Minutos que você correu', r.min)}${inp(`days.${d}.run.km`, 'Km (opcional)', prev(d, 'run.km'))}</div>
+      <div style="margin-top:8px">${inp(`days.${d}.run.maior`, 'Maior bloco sem parar (min)', prev(d, 'run.maior') || r.blocks[0])}</div>
+      <div style="margin-top:8px"><button class="btn sm" data-meta="${r.min}">Fiz a meta (${r.min} min)</button></div>
+      <div class="mut" style="margin-top:12px">Esforço da corrida (Borg)</div>${chips(`days.${d}.borgR`, [1,2,3,4,5,6,7,8,9,10])}</div>`;
+  }
+
+  h += `<div class="card"><h2>🩺 Como o corpo está</h2>
+    <label style="margin-top:6px">Alguma dor? Onde?<input type="text" data-p="days.${d}.dor" value="${val(`days.${d}.dor`)}" placeholder="ex: canela direita leve"></label>
+    <div class="chips"><button class="chip" data-dor="Nenhuma">Nenhuma</button></div>
+    <textarea data-p="days.${d}.notas" placeholder="Anotações do dia">${val(`days.${d}.notas`)}</textarea></div>`;
+
+  if (wd(d) === 0 && w <= WEEKS) h += cardMedidas(w);
+
+  h += `<button class="btn full ${rec.done ? 'pri' : ''}" data-done="${d}">${rec.done ? '✅ Dia concluído' : 'Marcar dia como concluído'}</button>`;
+  return h;
+}
+
+function vSemana() {
+  if (st.week == null) st.week = cw(wkOf(today()));
+  const w = st.week, ds = weekDates(w), t = today();
+  const tot = runWeek(w), meta = runTargetWeek(w);
+  let h = `<div class="card"><div class="row between"><button class="btn sm" data-wk="-1" ${w <= 1 ? 'disabled' : ''}>‹</button>
+    <div style="text-align:center"><div style="font-size:19px;font-weight:700">Semana ${w}${w === 6 ? ' (leve)' : ''}</div><div class="mut">${br(ds[0])} a ${br(ds[6])}</div></div>
+    <button class="btn sm" data-wk="1" ${w >= WEEKS ? 'disabled' : ''}>›</button></div></div>`;
+  h += `<div class="grid2" style="margin-bottom:12px">
+    <div class="stat"><div class="big">${fmt(tot)}</div><div class="mut">min corridos · meta ${meta}</div></div>
+    <div class="stat"><div class="big">${forcaWeek(w)}/4</div><div class="mut">treinos de força</div></div></div>`;
+  if (tot > meta * 1.15) h += `<div class="banner warn">⚠️ Você correu ${Math.round((tot / meta - 1) * 100)}% a mais que o planejado nesta semana. Empolgação é bom, mas canela e tendão se adaptam mais devagar que o fôlego — segure um pouco.</div>`;
+  h += `<div class="card">`;
+  for (const d of ds) {
+    const p = DAYMAP[wd(d)], r = runPlan(p.r, w), rm = runMin(d), past = d < t;
+    const f = p.f ? (forcaFeita(d) ? '✅' : past ? '❌' : '⬜') + ' Treino ' + p.f : '';
+    const run = p.r === 'rec' ? (get(`days.${d}.alt`) ? `✅ 🚲 ${val(`days.${d}.alt`)} min` : '🚲 bike/caminhada')
+      : rm > 0 ? `✅ ${fmt(rm)} min` : (past ? '❌ ' : '') + `${r.nome} ${r.min}′`;
+    h += `<div class="day ${d === t ? 'today' : ''}" data-date="${d}"><div><b>${DIAS_C[wd(d)]}</b> <span class="mut">${br(d)}</span>${db.days[d]?.done ? ' ✔️' : ''}</div>
+      <div class="r">${f ? f + '<br>' : ''}${run}</div></div>`;
+  }
+  h += `</div>`;
+  const pw = db.weekly[w]?.peso;
+  if (pw) h += `<div class="card"><h2>⚖️ Pesagem</h2><p>${fmt(num(pw))} kg${db.weekly[w].cintura ? ' · cintura ' + fmt(num(db.weekly[w].cintura)) + ' cm' : ''}</p></div>`;
+  return h;
+}
+
+function chart(vals, labels, {bars = false, target = null, unit = ''} = {}) {
+  const ys = vals.filter(v => v != null && !isNaN(v)), ts = target ? target.filter(v => v != null) : [];
+  const all = ys.concat(ts);
+  if (!ys.length) return '<div class="mut">Sem dados ainda.</div>';
+  const W = 320, H = 160, pl = 32, pr = 8, pt = 14, pb = 20, n = vals.length, bw = (W - pl - pr) / n;
+  let mn = Math.min(...all), mx = Math.max(...all);
+  if (bars) mn = 0;
+  if (mn === mx) { mn -= 1; mx += 1; }
+  const padv = (mx - mn) * 0.12; if (!bars) mn -= padv; mx += padv;
+  const x = i => pl + bw * (i + 0.5), y = v => pt + (H - pt - pb) * (1 - (v - mn) / (mx - mn));
+  let s = `<svg viewBox="0 0 ${W} ${H}">`;
+  for (let k = 0; k <= 2; k++) { const v = mn + (mx - mn) * k / 2; s += `<line x1="${pl}" x2="${W - pr}" y1="${y(v)}" y2="${y(v)}" stroke="#334155" stroke-width=".5"/><text x="${pl - 4}" y="${y(v) + 3}" text-anchor="end">${mx - mn > 10 ? Math.round(v) : fmt(v)}</text>`; }
+  labels.forEach((l, i) => s += `<text x="${x(i)}" y="${H - 5}" text-anchor="middle">${l}</text>`);
+  if (bars) {
+    vals.forEach((v, i) => { if (v) s += `<rect x="${x(i) - bw * 0.3}" y="${y(v)}" width="${bw * 0.6}" height="${y(0) - y(v)}" rx="3" fill="#22c55e"/>`; });
+    if (target) target.forEach((t, i) => s += `<line x1="${x(i) - bw * 0.4}" x2="${x(i) + bw * 0.4}" y1="${y(t)}" y2="${y(t)}" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3 2"/>`);
+  } else {
+    const pts = vals.map((v, i) => v != null && !isNaN(v) ? [x(i), y(v), v] : null).filter(Boolean);
+    s += `<polyline fill="none" stroke="#38bdf8" stroke-width="2.5" points="${pts.map(p => p[0] + ',' + p[1]).join(' ')}"/>`;
+    pts.forEach(p => s += `<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="#38bdf8"/><text x="${p[0]}" y="${p[1] - 7}" text-anchor="middle" style="fill:#e2e8f0">${fmt(p[2])}</text>`);
+  }
+  return s + '</svg>';
+}
+
+function vProg() {
+  const wk = [...Array(WEEKS + 1).keys()];
+  const lab = wk.map(w => w === 0 ? 'Ini' : 'S' + w);
+  const peso = wk.map(w => { const v = num(db.weekly[w]?.peso); return isNaN(v) ? null : v; });
+  const cint = wk.map(w => { const v = num(db.weekly[w]?.cintura); return isNaN(v) ? null : v; });
+  const ps = peso.filter(v => v != null), cs = cint.filter(v => v != null);
+  let h = '';
+  if (ps.length >= 2 || cs.length >= 2) {
+    h += `<div class="grid2" style="margin-bottom:12px">`;
+    if (ps.length >= 2) { const dlt = ps[ps.length - 1] - ps[0]; h += `<div class="stat"><div class="big">${dlt > 0 ? '+' : ''}${fmt(dlt)} kg</div><div class="mut">peso desde o início</div></div>`; }
+    if (cs.length >= 2) { const dlt = cs[cs.length - 1] - cs[0]; h += `<div class="stat"><div class="big">${dlt > 0 ? '+' : ''}${fmt(dlt)} cm</div><div class="mut">cintura desde o início</div></div>`; }
+    h += `</div>`;
+  }
+  h += `<div class="card"><h2>Peso (kg)</h2>${chart(peso, lab)}</div>`;
+  h += `<div class="card"><h2>Cintura (cm)</h2>${chart(cint, lab)}</div>`;
+  const wk1 = wk.slice(1);
+  const maior = wk1.map(w => { const v = Math.max(...weekDates(w).map(d => num(get(`days.${d}.run.maior`))).filter(x => !isNaN(x))); return isFinite(v) ? v : null; });
+  h += `<div class="card"><h2>Maior bloco correndo sem parar (min)</h2><div class="mut">Meta do ciclo: ~28 min seguidos, uns 4 km</div>${chart(maior, wk1.map(w => 'S' + w))}</div>`;
+  h += `<div class="card"><h2>Minutos corridos por semana</h2><div class="mut">Barras = o que você correu · tracejado = meta</div>${chart(wk1.map(runWeek), wk1.map(w => 'S' + w), {bars: true, target: wk1.map(runTargetWeek)})}</div>`;
+  h += `<div class="card"><h2>Medidas</h2><table><tr><th>Semana</th><th>Peso</th><th>Cintura</th><th>Quadril</th><th></th></tr>${wk.map(w => {
+    const m = db.weekly[w] || {};
+    return `<tr><td>${w === 0 ? 'Início' : w}</td><td>${m.peso ? fmt(num(m.peso)) : '–'}</td><td>${m.cintura ? fmt(num(m.cintura)) : '–'}</td><td>${m.quadril ? fmt(num(m.quadril)) : '–'}</td><td><button class="btn sm" data-date="${sundayOf(w)}">editar</button></td></tr>`;
+  }).join('')}</table></div>`;
+  const ex = EXMAP[st.exHist];
+  h += `<div class="card"><h2>Evolução por exercício</h2><select id="exsel">${'ABC'.split('').map(L => `<optgroup label="Treino ${L}">${EX[L].ex.map(e => `<option value="${e.id}" ${e.id === st.exHist ? 'selected' : ''}>${e.n}</option>`).join('')}</optgroup>`).join('')}</select>
+    <p class="mut">Meta: ${range(ex)} · topo da faixa = hora de progredir</p>
+    <table><tr><th>Sem.</th><th>Séries</th><th>Kg</th><th>Variação</th></tr>${wk1.map(w => {
+      const d = weekDates(w).find(x => DAYMAP[wd(x)].f === ex.L);
+      const s = Object.values(get(`days.${d}.sets.${ex.id}`) || {}).join('/');
+      return `<tr><td>${w}</td><td>${esc(s) || '–'}</td><td>${val(`days.${d}.kg.${ex.id}`) || '–'}</td><td>${val(`days.${d}.var.${ex.id}`) || '–'}</td></tr>`;
+    }).join('')}</table></div>`;
+  return h;
+}
+
+function vPlano() {
+  let h = `<div class="card"><h2>📋 Semana típica</h2><table>
+    <tr><th>Dia</th><th>Força</th><th>Corrida</th></tr>
+    <tr><td>Seg</td><td>A — Pernas e core</td><td>Revezamento leve</td></tr>
+    <tr><td>Ter</td><td>B — Parte de cima</td><td>Revezamento leve</td></tr>
+    <tr><td>Qua</td><td>—</td><td>Leve (S1-2) → <b>blocos firmes</b> (S3+)</td></tr>
+    <tr><td>Qui</td><td>C — Pernas de corredor</td><td>Revezamento leve</td></tr>
+    <tr><td>Sex</td><td>D — Cima + core</td><td>Revezamento leve</td></tr>
+    <tr><td>Sáb</td><td>—</td><td><b>Bloco longo</b></td></tr>
+    <tr><td>Dom</td><td>Pesagem</td><td>🚲 Bike leve ou caminhada (sem corrida)</td></tr></table>
+    <p class="mut">Os dias mais pesados para as pernas (A, quarta, C e sábado) ficam a pelo menos 48 h um do outro.</p></div>`;
+  h += `<div class="card"><h2>🏃 Corrida em revezamento</h2>
+    <p>Você corre um bloco enquanto o amigo vai de bike, depois trocam. A bike é a sua recuperação: pedale leve.</p><ul>
+    <li><b>Ponto de partida:</b> você aguenta ~1 km (uns 7-8 min). Os blocos começam abaixo disso, em 4 min, de propósito.</li>
+    <li><b>Meta do ciclo:</b> na semana 8, correr ~28 min sem parar (uns 4 km).</li>
+    <li><b>Blocos leves:</b> ritmo de conversa (Borg 4-5). Troque quando ainda daria pra correr mais um pouco — não espere morrer.</li>
+    <li><b>Blocos firmes (quarta, da semana 3 em diante):</b> mais rápido que o normal, Borg 7. Nunca tiro máximo.</li>
+    <li><b>Domingo sem corrida:</b> o fôlego melhora rápido, mas canela, joelho e tendões demoram mais pra se adaptar ao impacto.</li>
+    <li><b>Não pule etapas.</b> Se uma semana foi muito difícil ou apareceu dor, repita a semana.</li>
+    <li><b>Dias de perna (A e C):</b> força primeiro, corrida depois, ou em horários diferentes.</li></ul>
+    <table><tr><th>Sem.</th><th>Seg/Qui</th><th>Ter/Sex</th><th>Quarta</th><th>Sábado</th></tr>${CORRIDA.map((c, i) => `<tr><td>${i + 1}${i === 5 ? ' (leve)' : ''}</td><td>${c.curta.length}×${c.curta[0]}′</td><td>${c.media.length}×${c.media[0]}′</td><td>${c.qua.leve ? c.qua.leve.length + '×' + c.qua.leve[0] + '′ leve' : c.qua.aq + '′ + ' + c.qua.n + '×' + c.qua.t + '′ firme'}</td><td>${c.sab.join(' + ')}′</td></tr>`).join('')}</table>
+    <p class="mut">Os números são minutos correndo em cada bloco. Entre um bloco e outro, bike enquanto o amigo corre.</p></div>`;
+  h += `<div class="card"><h2>💪 Força</h2><ul>
+    <li>Semanas 1-2: Borg 6-7 (sobram 3-4 repetições)</li><li>Semanas 3-5: Borg 7-8 (sobram 2-3)</li><li>Semana 6: leve, uma série a menos, Borg 6</li><li>Semanas 7-8: Borg 8 (sobram 1-2)</li></ul>
+    <p><b>Progressão:</b> bateu o topo da faixa em todas as séries com boa técnica → no próximo treino passe para a variação mais difícil ou ponha mais peso na mochila.</p>
+    <h3>Aquecimento (6-8 min)</h3><ul><li>Polichinelo ou corrida parada — 2 min</li><li>Mobilidade de quadril (90/90) — 10 por lado</li><li>Agachamento lento com pausa — 10</li><li>Gato-camelo + rotação torácica — 8 por lado</li><li>Flexão inclinada na mesa — 8</li></ul>
+    <h3>Volta à calma (5 min)</h3><p class="mut">Respiração lenta + alongamento leve de quadríceps, posteriores, glúteos, flexores de quadril e panturrilha (30 s cada).</p>`;
+  for (const L of 'ABC') h += `<h3>Treino ${L} — ${EX[L].nome}</h3><ul>${EX[L].ex.map(e => `<li><b>${e.n}</b> — ${e.s} × ${range(e)}<br><span class="mut">${e.dica}</span></li>`).join('')}</ul>`;
+  h += `<h3>Treino D — ${EX.D.nome}</h3><p class="mut">3-4 voltas, 90 s de descanso no fim de cada volta.</p><ul>${EX.D.ex.map(([n, r]) => `<li>${n} — ${r}</li>`).join('')}</ul></div>`;
+  const pesoRef = num(db.settings.pesoRef) || [...Array(WEEKS + 1).keys()].reverse().map(w => num(db.weekly[w]?.peso)).find(v => !isNaN(v));
+  h += `<div class="card"><h2>🍽️ Alimentação</h2>
+    <label>Seu peso (kg) para os cálculos<input type="text" inputmode="decimal" id="pesoRef" value="${pesoRef ? fmt(pesoRef) : ''}" placeholder="ex: 85"></label>
+    <div id="calcout" style="margin-top:10px">${calc(pesoRef)}</div>
+    <ul>
+    <li><b>Déficit moderado:</b> 300 a 400 kcal a menos do que gasta. Meta de perder 0,5 a 1% do peso por semana.</li>
+    <li><b>Proteína em toda refeição</b> (3-4 por dia): ovos, frango, carne, peixe, iogurte natural, queijo branco, feijão, lentilha, whey se for prático.</li>
+    <li><b>Não corte o carboidrato</b> — é o combustível da corrida. Concentre arroz, batata, mandioca, aveia, fruta e pão perto da corrida de quarta e do bloco longo de sábado.</li>
+    <li><b>Jejum:</b> ok para os revezamentos leves. Quarta e sábado: coma algo leve antes (banana, pão com mel, iogurte).</li>
+    <li><b>Depois das corridas fortes:</b> proteína + carboidrato em até 2 h.</li>
+    <li><b>Prato:</b> metade salada/legumes, ¼ proteína, ¼ carboidrato.</li>
+    <li><b>Corte primeiro as calorias líquidas:</b> refrigerante, suco de caixinha, álcool, café muito adoçado.</li>
+    <li><b>Sono de 7-9 h</b> — é o que mais ajuda na recuperação.</li>
+    <li>Olhe a tendência do peso em 2-3 semanas, não o número de um dia.</li></ul>
+    <p class="mut">Se puder, uma consulta com nutricionista ajusta tudo ao seu peso e rotina.</p></div>`;
+  h += `<div class="card"><h2>🚨 Sinais de alerta</h2><ul>
+    <li>Dor na canela, joelho, tendão de Aquiles, calcanhar ou planta do pé que piora correndo ou continua no dia seguinte → troque a corrida por caminhada, bike ou folga.</li>
+    <li>Dor num ponto específico do osso → não corra e procure avaliação (pode ser fratura por estresse).</li>
+    <li>Cansaço que não passa, sono ruim, frequência cardíaca de repouso mais alta → dia de folga.</li>
+    <li><b>Pare na hora</b> se tiver dor no peito, falta de ar desproporcional ou tontura.</li></ul></div>`;
+  return h;
+}
+function calc(p) {
+  if (!p || isNaN(p)) return '<p class="mut">Coloque seu peso para ver as metas de proteína e água.</p>';
+  return `<div class="grid2"><div class="stat"><div class="big">${Math.round(p * 1.6)}-${Math.round(p * 2.2)} g</div><div class="mut">proteína por dia</div></div>
+    <div class="stat"><div class="big">${fmt(p * 0.035)} L</div><div class="mut">água por dia + ~0,5 L por hora de corrida</div></div></div>`;
+}
+
+function vMais() {
+  const n = Object.keys(db.days).length;
+  return `<div class="card"><h2>💾 Backup</h2>
+    <p class="mut">Tudo que você preenche fica salvo automaticamente <b>neste navegador, neste aparelho</b>. Se limpar os dados do navegador ou trocar de aparelho, perde. Faça backup de vez em quando — no celular dá pra mandar direto pro Drive ou WhatsApp.</p>
+    <p>${n} dia${n === 1 ? '' : 's'} registrado${n === 1 ? '' : 's'} · último backup: <b>${db.lastExport ? br(db.lastExport) : 'nunca'}</b></p>
+    <div class="row"><button class="btn pri" data-act="export">Fazer backup</button><button class="btn" data-act="import">Restaurar backup</button></div></div>
+    <div class="card"><h2>📆 Início do programa</h2><p class="mut">Sempre começa numa segunda. Se escolher outro dia, uso a segunda daquela semana.</p>
+    <input type="date" id="startdate" value="${db.settings.start}"></div>
+    <div class="card"><h2>🗑️ Apagar tudo</h2><p class="mut">Remove todos os registros deste navegador. Faça backup antes.</p><button class="btn danger" data-act="reset">Apagar todos os dados</button></div>`;
+}
+
+const VIEWS = {hoje: vHoje, semana: vSemana, prog: vProg, plano: vPlano, mais: vMais};
+function render(top) {
+  el('main').innerHTML = VIEWS[st.tab]();
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === st.tab));
+  if (top) window.scrollTo(0, 0);
+}
+function goDate(d) { st.date = d; st.tab = 'hoje'; render(true); }
+
+async function exportar() {
+  const name = `treino2026-backup-${today()}.json`;
+  const file = new File([JSON.stringify(db)], name, {type: 'application/json'});
+  const ok = () => { db.lastExport = today(); save(); render(); toast('Backup feito ✓'); };
+  if (navigator.canShare && navigator.canShare({files: [file]})) {
+    try { await navigator.share({files: [file], title: 'Backup do treino'}); return ok(); }
+    catch (e) { if (e.name === 'AbortError') return; }
+  }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(file); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  ok();
+}
+
+const T = {ph: [], i: 0, end: 0, left: 0, paused: false, iv: null, ac: null, wl: null, lastBeep: -1};
+function audio() {
+  if (!T.ac) { try { T.ac = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {} }
+  if (T.ac && T.ac.state === 'suspended') T.ac.resume();
+  return T.ac;
+}
+function beep(f = 880, ms = 150) {
+  const c = audio(); if (!c) return;
+  const o = c.createOscillator(), g = c.createGain();
+  o.frequency.value = f; o.connect(g); g.connect(c.destination);
+  g.gain.setValueAtTime(0.3, c.currentTime); g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + ms / 1000);
+  o.start(); o.stop(c.currentTime + ms / 1000 + 0.02);
+}
+async function wake(on) {
+  try {
+    if (on && 'wakeLock' in navigator) T.wl = await navigator.wakeLock.request('screen');
+    else if (!on && T.wl) { await T.wl.release(); T.wl = null; }
+  } catch (e) {}
+}
+const mmss = s => Math.floor(s / 60) + ':' + pad(s % 60);
+function startTimer(ph) {
+  audio();
+  Object.assign(T, {ph, i: 0, paused: false, end: Date.now() + ph[0].s * 1000, lastBeep: -1});
+  clearInterval(T.iv); T.iv = setInterval(tick, 200);
+  el('#tpause').textContent = '⏸ Pausar';
+  el('#tskip').style.display = ph.length > 1 ? '' : 'none';
+  el('#timer').style.display = 'block';
+  wake(true); tick();
+}
+function nextPhase() {
+  T.i++;
+  if (T.i >= T.ph.length) { stopTimer(); toast('Timer terminado ✓'); return false; }
+  T.end = Date.now() + T.ph[T.i].s * 1000; T.lastBeep = -1;
+  return true;
+}
+function tick() {
+  if (T.paused) return;
+  let left = Math.ceil((T.end - Date.now()) / 1000);
+  if (left <= 3 && left > 0 && left !== T.lastBeep) { T.lastBeep = left; beep(660, 90); }
+  if (left <= 0) {
+    beep(1000, 450); if (navigator.vibrate) navigator.vibrate([300, 120, 300]);
+    if (!nextPhase()) return;
+    left = T.ph[T.i].s;
+  }
+  const p = T.ph[T.i];
+  el('#tlabel').textContent = p.l;
+  el('#tnext').textContent = T.ph[T.i + 1] ? 'depois: ' + T.ph[T.i + 1].l : '';
+  el('#ttime').textContent = mmss(Math.max(0, left));
+  el('#timer').className = p.hard ? 'hard' : '';
+}
+function stopTimer() { clearInterval(T.iv); wake(false); el('#timer').style.display = 'none'; }
+function blockPhases(blocks, firm) {
+  const ph = [], n = blocks.length;
+  blocks.forEach((m, i) => {
+    const forte = firm && i > 0;
+    ph.push({l: `🏃 Sua vez ${i + 1}/${n}${forte ? ' — FIRME' : ' — leve'}`, s: m * 60, hard: forte});
+    ph.push({l: `🚲 Bike — vez do amigo ${i + 1}/${n}`, s: m * 60});
+  });
+  return ph;
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible' && el('#timer').style.display === 'block') wake(true); });
+
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset.p) {
+    set(t.dataset.p, t.value.trim() === '' ? '' : t.value);
+    if (t.dataset.ex) { const ex = EXMAP[t.dataset.ex]; el(`#ex-${ex.id} .toptag`).innerHTML = topTag(st.date, ex, wkOf(st.date)); }
+  }
+  if (t.id === 'pesoRef') { db.settings.pesoRef = t.value; save(); el('#calcout').innerHTML = calc(num(t.value)); }
+});
+document.addEventListener('change', e => {
+  const t = e.target;
+  if (t.id === 'exsel') { st.exHist = t.value; render(); }
+  if (t.id === 'startdate' && t.value) {
+    const off = (pd(t.value).getDay() + 6) % 7;
+    db.settings.start = add(t.value, -off); st.week = null; save(); render();
+    toast('Início: segunda ' + br(db.settings.start));
+  }
+  if (t.id === 'impfile' && t.files[0]) {
+    t.files[0].text().then(txt => {
+      try {
+        const d = JSON.parse(txt);
+        if (!d.days) throw 0;
+        if (!confirm('Isso substitui os dados atuais pelos do backup. Continuar?')) return;
+        localStorage.setItem(KEY, JSON.stringify(d)); db = load(); render(true); toast('Backup restaurado ✓');
+      } catch (err) { alert('Esse arquivo não parece um backup do treino.'); }
+      t.value = '';
+    });
+  }
+});
+document.addEventListener('click', e => {
+  const q = s => e.target.closest(s);
+  let b;
+  if ((b = q('nav button'))) { st.tab = b.dataset.tab; if (st.tab === 'hoje') st.date = st.date || today(); render(true); return; }
+  if ((b = q('[data-go]'))) { const g = +b.dataset.go; goDate(g === 0 ? today() : add(st.date, g)); return; }
+  if ((b = q('[data-date]'))) { goDate(b.dataset.date); return; }
+  if ((b = q('[data-wk]'))) { st.week = cw(st.week + +b.dataset.wk); render(); return; }
+  if ((b = q('[data-tog]'))) { el('#ex-' + b.dataset.tog).classList.toggle('open'); return; }
+  if ((b = q('[data-chip]'))) {
+    const p = b.dataset.chip, on = String(get(p) ?? '') === b.dataset.v;
+    set(p, on ? '' : +b.dataset.v);
+    b.parentElement.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', !on && c === b));
+    return;
+  }
+  if ((b = q('[data-dor]'))) { set(`days.${st.date}.dor`, b.dataset.dor); render(); return; }
+  if ((b = q('[data-meta]'))) { set(`days.${st.date}.run.min`, b.dataset.meta); render(); toast('Corrida registrada ✓'); return; }
+  if ((b = q('[data-done]'))) { const p = `days.${b.dataset.done}.done`; set(p, get(p) ? '' : true); render(); return; }
+  if ((b = q('[data-timer]'))) { startTimer([{l: 'Descanso', s: +b.dataset.timer}]); return; }
+  if ((b = q('[data-blocks]'))) { startTimer(blockPhases(b.dataset.blocks.split(',').map(Number), +b.dataset.firm)); return; }
+  if ((b = q('[data-act]'))) {
+    const a = b.dataset.act;
+    if (a === 'export') exportar();
+    if (a === 'import') el('#impfile').click();
+    if (a === 'reset' && confirm('Apagar TODOS os registros deste navegador?') && confirm('Tem certeza? Não dá pra desfazer.')) { localStorage.removeItem(KEY); db = load(); render(true); toast('Dados apagados'); }
+    return;
+  }
+  if (e.target.id === 'tstop') stopTimer();
+  if (e.target.id === 'tplus') { if (T.paused) T.left += 15000; else T.end += 15000; tick(); }
+  if (e.target.id === 'tskip') { if (nextPhase()) { T.paused = false; el('#tpause').textContent = '⏸ Pausar'; tick(); } }
+  if (e.target.id === 'tpause') {
+    if (!T.paused) { T.left = T.end - Date.now(); T.paused = true; e.target.textContent = '▶ Continuar'; }
+    else { T.end = Date.now() + T.left; T.paused = false; e.target.textContent = '⏸ Pausar'; }
+  }
+});
+
+if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => {});
+render();
+</script>
+</body>
+</html>

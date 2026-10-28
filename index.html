@@ -102,55 +102,59 @@ const DIAS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 const DIAS_C = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
 
 const EX = {
-  A: {nome: 'Pernas e core', ex: [
-    {id:'agach', n:'Agachamento taça (mochila no peito)', s:3, min:12, max:15, d:60, dica:'Mochila abraçada no peito, pés na largura dos ombros. Desce até a coxa passar da linha do joelho, tronco alto, joelhos acompanhando a ponta dos pés.', prog:'Mais peso na mochila → pausa de 2 s embaixo.'},
-    {id:'bulgaro', n:'Agachamento búlgaro', s:3, min:8, max:12, cada:1, d:60, dica:'Pé de trás apoiado na cadeira, desce o joelho de trás em direção ao chão. Tronco um pouco inclinado à frente pega mais glúteo.', prog:'Sem peso → com mochila.'},
-    {id:'ponteU', n:'Ponte de glúteo unilateral', s:3, min:10, max:15, cada:1, d:45, dica:'Uma perna no ar, empurra o calcanhar de apoio e sobe o quadril até alinhar com o tronco. Aperta o glúteo 1 s em cima.', prog:'Bilateral → unilateral → ombros apoiados na cadeira.'},
-    {id:'stiff', n:'Stiff unilateral com mochila', s:3, min:10, max:12, cada:1, d:45, dica:'Joelho de apoio levemente dobrado, leva o quadril para trás com a coluna neutra até alongar o posterior. A outra perna sobe para trás.', prog:'Com apoio na parede → sem apoio.'},
-    {id:'pantU', n:'Panturrilha unilateral no degrau', s:3, min:12, max:20, cada:1, d:30, dica:'Ponta do pé no degrau, desce o calcanhar o máximo e sobe na ponta. Pausa de 1-2 s em cima e embaixo.', prog:'Pausas mais longas → mochila nas costas.'},
+  A: {nome: 'Pernas pesado + core', ex: [
+    {id:'agachB', n:'Agachamento com barra', s:4, min:8, max:12, d:90, kg:'total', dica:'Barra nos trapézios, pés na largura dos ombros. Desce até as coxas ficarem paralelas ao chão com o tronco firme e os joelhos acompanhando a ponta dos pés. Com só ~20 kg, deixe mais difícil descendo em 3 s.', prog:'Mais anilhas → descida em 3 s → pausa de 2 s embaixo.'},
+    {id:'stiffB', n:'Stiff com barra', s:3, min:10, max:12, d:75, kg:'total', dica:'Joelhos levemente dobrados, leva o quadril para trás com as costas retas até sentir alongar atrás da coxa. A barra desce rente às pernas.', prog:'Mais anilhas → descida em 3 s.'},
+    {id:'bulgaroH', n:'Agachamento búlgaro com halteres', s:3, min:8, max:12, cada:1, d:60, kg:'cada', dica:'Pé de trás apoiado na cadeira, um halter em cada mão. Desce o joelho de trás em direção ao chão. Tronco um pouco inclinado à frente pega mais glúteo.', prog:'Sem peso → halteres → halteres mais pesados.'},
+    {id:'hipT', n:'Elevação de quadril com barra (hip thrust)', s:3, min:10, max:15, d:60, kg:'total', dica:'Costas apoiadas no sofá ou numa cadeira firme encostada na parede, barra sobre o quadril (com uma toalha dobrada embaixo). Sobe até o tronco ficar alinhado e aperta o glúteo 1 s em cima.', prog:'Mais anilhas → pausa de 2 s em cima → unilateral sem barra.'},
+    {id:'pantU', n:'Panturrilha unilateral no degrau', s:3, min:12, max:20, cada:1, d:30, kg:'cada', dica:'Ponta do pé no degrau, halter na mão do mesmo lado. Desce o calcanhar o máximo e sobe na ponta. Pausa de 1-2 s em cima e embaixo.', prog:'Sem peso → com halter → pausas mais longas.'},
     {id:'prancha', n:'Prancha frontal', s:3, min:30, max:60, u:'s', d:30, dica:'Cotovelos embaixo dos ombros, glúteo e abdômen contraídos, quadril sem cair nem empinar.', prog:'Mais tempo → elevar um pé.'}
   ]},
-  B: {nome: 'Parte de cima', ex: [
-    {id:'flexao', n:'Flexão de braço', s:4, min:6, max:15, d:60, dica:'Mãos um pouco além da largura dos ombros, corpo em linha reta, peito quase encosta. Se não fizer 6 no chão, comece inclinado na mesa.', prog:'Inclinada na mesa → no chão → pés na cadeira.'},
-    {id:'remInv', n:'Remada invertida embaixo da mesa', s:4, min:6, max:12, d:60, dica:'Deitado embaixo de uma mesa FIRME, segura a borda e puxa o peito até ela com o corpo reto. Teste se a mesa aguenta antes!', prog:'Joelhos dobrados → pernas esticadas.'},
-    {id:'pike', n:'Flexão pike (ombro)', s:3, min:6, max:12, d:60, dica:'Quadril alto, corpo em V invertido. Desce a cabeça em direção ao chão, um pouco à frente das mãos.', prog:'Pés no chão → pés na cadeira.'},
-    {id:'remU', n:'Remada unilateral com mochila', s:3, min:10, max:15, cada:1, d:45, dica:'Mão e joelho apoiados na cadeira, puxa a mochila até o quadril com o cotovelo junto ao corpo.', prog:'Mais peso na mochila.'},
-    {id:'mergulho', n:'Mergulho na cadeira', s:3, min:8, max:15, d:45, dica:'Mãos na borda da cadeira, desce até o cotovelo ficar em ~90°, ombros longe das orelhas. Se o ombro reclamar, diminua a amplitude.', prog:'Joelhos dobrados → pernas esticadas.'},
-    {id:'ytw', n:'Y-T-W deitado de bruços', s:2, min:8, max:8, nota:'de cada letra', d:30, dica:'De bruços, testa numa toalha. Levanta os braços formando Y, depois T, depois W, apertando as escápulas.', prog:'Pausa de 2 s em cada posição.'},
-    {id:'hollow', n:'Hollow hold (canoinha)', s:3, min:20, max:40, u:'s', d:30, dica:'Lombar colada no chão, ombros e pernas um pouco elevados. Joelhos dobrados deixam mais fácil.', prog:'Joelhos dobrados → pernas esticadas.'}
+  B: {nome: 'Empurrar (peito, ombro, tríceps)', ex: [
+    {id:'supino', n:'Supino com barra no chão', s:4, min:8, max:12, d:90, kg:'total', dica:'Deitado no chão, joelhos dobrados. Desce a barra até os cotovelos encostarem no chão, cotovelos a ~45° do corpo, e empurra. O chão protege o ombro e limita a amplitude.', prog:'Mais anilhas → pausa de 1 s com o cotovelo no chão.'},
+    {id:'desenv', n:'Desenvolvimento militar com barra', s:3, min:8, max:12, d:90, kg:'total', dica:'Em pé, barra na altura dos ombros, abdômen e glúteo firmes. Empurra para cima sem arquear a lombar.', prog:'Mais anilhas.'},
+    {id:'flexao', n:'Flexão de braço', s:3, min:8, max:15, d:60, bw:1, dica:'Mãos um pouco além da largura dos ombros, corpo em linha reta, peito quase encosta. Se tiver paralelas de chão, use-as para descer mais fundo.', prog:'No chão → pés na cadeira → pausa de 1 s embaixo.'},
+    {id:'elevLat', n:'Elevação lateral com halteres', s:3, min:12, max:15, d:45, kg:'cada', dica:'Braços levemente dobrados, sobe até a altura dos ombros e segura 1 s em cima. Sem balançar o tronco.', prog:'Halter mais pesado → pausa de 2 s em cima.'},
+    {id:'triF', n:'Tríceps francês com halter', s:3, min:10, max:12, d:60, kg:'total', dica:'Um halter seguro com as duas mãos acima da cabeça. Cotovelos fixos apontando pra frente, desce o halter atrás da cabeça e sobe.', prog:'Halter mais pesado.'},
+    {id:'mergulho', n:'Mergulho na cadeira', s:2, min:10, max:15, d:45, bw:1, dica:'Mãos na borda da cadeira atrás do corpo, desce até o cotovelo ficar em ~90°, ombros longe das orelhas. Se o ombro reclamar, diminua a amplitude.', prog:'Joelhos dobrados → pernas esticadas → pés em outra cadeira.'}
   ]},
-  C: {nome: 'Pernas de corredor', ex: [
-    {id:'afundo', n:'Afundo reverso com mochila', s:3, min:10, max:12, cada:1, d:60, dica:'Passo para trás, desce o joelho de trás perto do chão e volta empurrando com o calcanhar da frente.', prog:'Mais peso na mochila.'},
-    {id:'subida', n:'Subida no degrau/cadeira', s:3, min:10, max:10, cada:1, d:60, dica:'Pé inteiro em cima, sobe empurrando com a perna de cima sem dar impulso com a de baixo.', prog:'Degrau mais alto → com mochila.'},
-    {id:'ponteP', n:'Ponte de glúteo com pausa de 3 s', s:3, min:12, max:15, d:45, dica:'Ponte com as duas pernas, segura 3 s em cima apertando o glúteo.', prog:'Bilateral → unilateral.'},
-    {id:'soleo', n:'Panturrilha com joelho dobrado (sóleo)', s:3, min:15, max:20, d:30, dica:'Sentado com joelhos a 90° e a mochila sobre as coxas (ou em pé com joelhos dobrados), sobe na ponta dos pés. Essencial pra quem corre.', prog:'Mais peso na mochila.'},
-    {id:'tibial', n:'Tibial na parede', s:2, min:15, max:20, d:30, dica:'Costas na parede, calcanhares uns 30 cm à frente. Levanta as pontas dos pés o máximo e desce devagar. Ajuda a prevenir canelite.', prog:'Mais lento → pausa em cima.'},
-    {id:'deadbug', n:'Dead bug', s:3, min:8, max:8, cada:1, d:30, dica:'Deitado, braços pra cima e joelhos a 90°. Estende braço e perna opostos sem tirar a lombar do chão.', prog:'Braços e pernas mais esticados.'}
+  C: {nome: 'Pernas de corredor + core', ex: [
+    {id:'afundoH', n:'Afundo reverso com halteres', s:3, min:10, max:12, cada:1, d:60, kg:'cada', dica:'Um halter em cada mão. Passo para trás, desce o joelho de trás perto do chão e volta empurrando com o calcanhar da frente.', prog:'Halteres mais pesados.'},
+    {id:'subidaH', n:'Subida no degrau com halteres', s:3, min:10, max:10, cada:1, d:60, kg:'cada', dica:'Pé inteiro em cima do degrau ou cadeira firme, sobe empurrando com a perna de cima sem dar impulso com a de baixo.', prog:'Degrau mais alto → halteres mais pesados.'},
+    {id:'stiffU', n:'Stiff unilateral com halter', s:3, min:10, max:12, cada:1, d:45, kg:'cada', dica:'Halter na mão oposta à perna de apoio, joelho de apoio levemente dobrado. Leva o quadril para trás com a coluna neutra, a outra perna sobe para trás.', prog:'Com apoio na parede → sem apoio → halter mais pesado.'},
+    {id:'soleo', n:'Panturrilha sentado (sóleo)', s:3, min:15, max:20, d:30, kg:'total', dica:'Sentado com joelhos a 90°, halteres (ou a barra) apoiados sobre as coxas perto do joelho. Sobe na ponta dos pés. Essencial pra quem corre.', prog:'Mais peso sobre os joelhos.'},
+    {id:'tibial', n:'Tibial na parede', s:2, min:15, max:20, d:30, bw:1, dica:'Costas na parede, calcanhares uns 30 cm à frente. Levanta as pontas dos pés o máximo e desce devagar. Ajuda a prevenir canelite.', prog:'Mais lento → pausa em cima.'},
+    {id:'deadbug', n:'Dead bug', s:3, min:8, max:8, cada:1, d:30, bw:1, dica:'Deitado, braços pra cima e joelhos a 90°. Estende braço e perna opostos sem tirar a lombar do chão. Se tiver roda abdominal, pode trocar por ela.', prog:'Braços e pernas mais esticados → segurar um halter leve.'}
   ]},
-  D: {nome: 'Parte de cima + core (circuito)', circ:1, d:90, ex: [
-    ['Flexão de braço','8-12'], ['Remada invertida ou com mochila','10-12'], ['Flexão pike','6-10'], ['Mergulho na cadeira','8-12'],
-    ['Prancha com toque no ombro','10 cada lado'], ['Prancha lateral','20-30 s cada lado'], ['Abdominal bicicleta','20 no total'], ['Superman','10']
+  D: {nome: 'Puxar (costas, bíceps, postura)', ex: [
+    {id:'barraF', n:'Barra fixa pronada', s:4, min:4, max:10, d:120, bw:1, dica:'Pegada um pouco mais aberta que os ombros, palmas para fora. Puxa até o queixo passar da barra e desce controlando. Não sai 4? Faça negativas: suba com ajuda de uma cadeira e desça em 4-5 s.', prog:'Negativas → repetições completas → pausa de 1 s em cima.'},
+    {id:'remadaB', n:'Remada curvada com barra', s:4, min:8, max:12, d:90, kg:'total', dica:'Tronco inclinado ~45°, coluna neutra. Puxa a barra em direção ao umbigo e junta as escápulas em cima.', prog:'Mais anilhas → pausa de 1 s em cima.'},
+    {id:'remadaU', n:'Remada unilateral com halter', s:3, min:10, max:12, cada:1, d:60, kg:'cada', dica:'Mão e joelho apoiados na cadeira, puxa o halter até o quadril com o cotovelo junto ao corpo. Substitui a remada no elástico.', prog:'Halter mais pesado.'},
+    {id:'crucInv', n:'Crucifixo inverso com halteres', s:3, min:12, max:15, d:45, kg:'cada', dica:'Tronco inclinado à frente, braços abertos como asas até a altura dos ombros, cotovelos levemente dobrados. Substitui o face pull do elástico: trabalha o ombro de trás e a postura.', prog:'Pausa de 2 s em cima → halter mais pesado.'},
+    {id:'rosca', n:'Rosca direta com halteres', s:3, min:10, max:12, d:60, kg:'cada', dica:'Cotovelos colados no corpo, gira o pulso ao subir. Desce controlando, sem balançar.', prog:'Halter mais pesado → descida em 3 s.'},
+    {id:'martelo', n:'Rosca martelo', s:2, min:12, max:15, d:45, kg:'cada', dica:'Pegada neutra (polegar pra cima), sem balançar o corpo.', prog:'Halter mais pesado.'},
+    {id:'pranchaL', n:'Prancha lateral', s:2, min:30, max:45, u:'s', cada:1, d:30, dica:'Apoio no antebraço, quadril alto, corpo em linha reta.', prog:'Mais tempo → elevar a perna de cima.'}
   ]}
 };
 const EXMAP = {};
-for (const L of 'ABC') for (const e of EX[L].ex) EXMAP[e.id] = {...e, L};
+for (const L of 'ABCD') for (const e of EX[L].ex) EXMAP[e.id] = {...e, L};
 
-const DAYMAP = {1:{f:'A',r:'curta'}, 2:{f:'B',r:'media'}, 3:{r:'qua'}, 4:{f:'C',r:'curta'}, 5:{f:'D',r:'media'}, 6:{r:'sab'}, 0:{r:'rec'}};
+const DAYMAP = {1:{f:'A',r:'rec'}, 2:{f:'B',r:'firme'}, 3:{f:'C',r:'rec'}, 4:{r:'curta',opt:1}, 5:{f:'D',r:'media'}, 6:{r:'sab'}, 0:{r:'curta'}};
 // Minutos correndo por bloco; entre os blocos, bike enquanto o amigo corre.
 const CORRIDA = [
-  {curta:[4,4,4],  media:[4,4,4,4], qua:{leve:[4,4,4,4]}, sab:[8,4,4]},
-  {curta:[5,5,5],  media:[5,5,5,5], qua:{leve:[5,5,5,5]}, sab:[10,4,4]},
-  {curta:[6,6,6],  media:[6,6,6,6], qua:{aq:5, n:6, t:1}, sab:[12,6]},
-  {curta:[7,7,7],  media:[8,8,8],   qua:{aq:5, n:8, t:1}, sab:[15,5]},
-  {curta:[10,10],  media:[9,9,9],   qua:{aq:5, n:5, t:2}, sab:[18]},
-  {curta:[6,6],    media:[6,6,6],   qua:{aq:5, n:4, t:1}, sab:[12]},
-  {curta:[12,12],  media:[14,14],   qua:{aq:5, n:5, t:3}, sab:[22]},
-  {curta:[14,14],  media:[16,16],   qua:{aq:5, n:6, t:3}, sab:[28]}
+  {curta:[4,4,4],  media:[4,4,4,4], firme:{leve:[4,4,4,4]}, sab:[8,4,4]},
+  {curta:[5,5,5],  media:[5,5,5,5], firme:{leve:[5,5,5,5]}, sab:[10,4,4]},
+  {curta:[6,6,6],  media:[6,6,6,6], firme:{aq:5, n:6, t:1}, sab:[12,6]},
+  {curta:[7,7,7],  media:[8,8,8],   firme:{aq:5, n:8, t:1}, sab:[15,5]},
+  {curta:[10,10],  media:[9,9,9],   firme:{aq:5, n:5, t:2}, sab:[18]},
+  {curta:[6,6],    media:[6,6,6],   firme:{aq:5, n:4, t:1}, sab:[12]},
+  {curta:[12,12],  media:[14,14],   firme:{aq:5, n:5, t:3}, sab:[22]},
+  {curta:[14,14],  media:[16,16],   firme:{aq:5, n:6, t:3}, sab:[28]}
 ];
 
 let db = load();
 const today = () => iso(new Date());
-const st = {tab:'hoje', date: today(), week: null, exHist: 'agach'};
+const st = {tab:'hoje', date: today(), week: null, exHist: 'agachB'};
 
 function load() {
   let d = {};
@@ -206,21 +210,20 @@ function blocksText(b) {
 }
 const LEVE = ' Ritmo de conversa (Borg 4-5): troque com o amigo quando ainda daria pra correr mais um pouco, não quando estiver morto.';
 function runPlan(type, w) {
-  if (type === 'rec') return {nome:'Sem corrida — bike leve ou caminhada', min:0, blocks:[], det:'30-40 min de bike leve ou caminhada, ou folga. Esse dia sem impacto dá tempo pra canela, joelho e tendões se adaptarem à corrida.'};
+  if (type === 'rec') return {nome:'Sem corrida hoje', min:0, blocks:[], det:'Dia de perna sem corrida. Se quiser mexer mais, 20-30 min de bike leve ou caminhada — opcional.'};
   const c = CORRIDA[cw(w) - 1];
-  if (type === 'qua' && !c.qua.leve) {
-    const q = c.qua, blocks = [q.aq, ...Array(q.n).fill(q.t)];
+  if (type === 'firme' && !c.firme.leve) {
+    const q = c.firme, blocks = [q.aq, ...Array(q.n).fill(q.t)];
     return {nome:'Blocos firmes', min: blocks.reduce((a, b) => a + b, 0), blocks, firm: 1,
       det:`1 bloco de ${q.aq} min leve pra aquecer, depois ${q.n} blocos de ${q.t} min em ritmo firme (Borg 7), revezando com a bike. Na bike, pedale leve pra recuperar. Coma algo leve antes se estiver em jejum.`};
   }
-  const blocks = type === 'qua' ? c.qua.leve : c[type];
+  const blocks = type === 'firme' ? c.firme.leve : c[type];
   const min = blocks.reduce((a, b) => a + b, 0);
   if (type === 'sab') return {nome:'Bloco longo', min, blocks, det:`O foco de hoje é o primeiro bloco: ${blocks[0]} min correndo sem parar${blocks.length > 1 ? ', depois ' + blocksText(blocks.slice(1)) : ''}. Vá devagar — o objetivo é aguentar o tempo, não ser rápido.` + (cw(w) === 8 ? ' Semana 8: tente fazer 4 km!' : '')};
   return {nome:'Revezamento leve', min, blocks, det: blocksText(blocks) + ' correndo, revezando com a bike.' + LEVE};
 }
-const runTargetWeek = w => weekDates(w).reduce((s, d) => s + runPlan(DAYMAP[wd(d)].r, w).min, 0);
+const runTargetWeek = w => weekDates(w).reduce((s, d) => s + (DAYMAP[wd(d)].opt ? 0 : runPlan(DAYMAP[wd(d)].r, w).min), 0);
 const nSets = (ex, w) => cw(w) === 6 ? Math.max(1, ex.s - 1) : ex.s;
-const voltas = w => { const c = cw(w); return (c <= 2 || c === 6) ? 3 : 4; };
 const borgMeta = w => { const c = cw(w); return c <= 2 ? '6-7' : c <= 5 ? '7-8' : c === 6 ? '6' : '8'; };
 const range = ex => (ex.min === ex.max ? ex.min : ex.min + '-' + ex.max) + (ex.u === 's' ? ' s' : '') + (ex.cada ? ' cada lado' : '') + (ex.nota ? ' ' + ex.nota : '');
 
@@ -228,7 +231,6 @@ function forcaFeita(d) {
   const r = db.days[d], p = DAYMAP[wd(d)];
   if (!r || !p.f) return false;
   if (r.fdone) return true;
-  if (p.f === 'D') return !!r.voltas;
   return !!r.sets && Object.values(r.sets).some(o => Object.values(o).some(v => v !== ''));
 }
 function runMin(d) { const v = num(get(`days.${d}.run.min`)); return isNaN(v) ? 0 : v; }
@@ -288,26 +290,19 @@ function vHoje() {
   if (p.f) {
     const W = EX[p.f];
     h += `<div class="card"><h2>💪 Treino ${p.f} — ${W.nome}</h2>
-      <div class="mut">Esforço alvo: Borg ${borgMeta(w)}${p.f === 'A' || p.f === 'C' ? ' · faça antes da corrida (ou em outro horário)' : ''}.${W.circ ? '' : ' Toque no nome do exercício para ver como fazer. Os números cinza são da semana passada.'}</div>`;
-    if (W.circ) {
-      h += `<p class="mut" style="margin-top:10px"><b>${voltas(w)} voltas</b>, exercícios em sequência, ${W.d} s de descanso no fim de cada volta. Sem saltos.</p>
-        <table>${W.ex.map(([n, r]) => `<tr><td>${n}</td><td style="text-align:right;white-space:nowrap">${r}</td></tr>`).join('')}</table>
-        <div class="grid2" style="margin-top:10px">${inp(`days.${d}.voltas`, 'Voltas feitas', prev(d, 'voltas') || voltas(w))}${inp(`days.${d}.tempo`, 'Tempo total (min)', prev(d, 'tempo'))}</div>
-        <div style="margin-top:8px"><button class="btn sm" data-timer="${W.d}">⏱ Descanso ${W.d} s</button></div>`;
-    } else {
-      for (const ex of W.ex) {
-        const n = nSets(ex, w), sp = `days.${d}.sets.${ex.id}`;
-        let cells = '';
-        for (let i = 0; i < n; i++) cells += `<label>S${i + 1}${ex.u === 's' ? ' (s)' : ''}<input type="text" inputmode="decimal" data-p="${sp}.${i}" data-ex="${ex.id}" value="${val(sp + '.' + i)}" placeholder="${esc(prev(d, 'sets.' + ex.id + '.' + i))}"></label>`;
-        if (ex.u !== 's') cells += `<label>Kg<input type="text" inputmode="decimal" data-p="days.${d}.kg.${ex.id}" value="${val(`days.${d}.kg.${ex.id}`)}" placeholder="${esc(prev(d, 'kg.' + ex.id))}"></label>`;
-        h += `<div class="ex" id="ex-${ex.id}">
-          <div class="row between"><span class="exname" data-tog="${ex.id}">${ex.n} <span class="mut">ⓘ</span></span><span class="toptag">${topTag(d, ex, w)}</span></div>
-          <div class="mut">${n} × ${range(ex)} · descanso ${ex.d} s</div>
-          <div class="dica">${ex.dica}<br><b>Progressão:</b> ${ex.prog}</div>
-          <input type="text" style="margin-top:8px" data-p="days.${d}.var.${ex.id}" value="${val(`days.${d}.var.${ex.id}`)}" placeholder="Variação usada${prev(d, 'var.' + ex.id) ? ' (antes: ' + esc(prev(d, 'var.' + ex.id)) + ')' : ' (opcional)'}">
-          <div class="sets">${cells}</div>
-          <div style="margin-top:8px"><button class="btn sm" data-timer="${ex.d}">⏱ Descanso ${ex.d} s</button></div></div>`;
-      }
+      <div class="mut">Esforço alvo: Borg ${borgMeta(w)}${p.r !== 'rec' ? ' · a corrida pode ser antes ou depois' : ''}. Toque no nome do exercício para ver como fazer. Os números cinza são da semana passada. Kg = peso total da barra ou de cada halter.</div>`;
+    for (const ex of W.ex) {
+      const n = nSets(ex, w), sp = `days.${d}.sets.${ex.id}`;
+      let cells = '';
+      for (let i = 0; i < n; i++) cells += `<label>S${i + 1}${ex.u === 's' ? ' (s)' : ''}<input type="text" inputmode="decimal" data-p="${sp}.${i}" data-ex="${ex.id}" value="${val(sp + '.' + i)}" placeholder="${esc(prev(d, 'sets.' + ex.id + '.' + i))}"></label>`;
+      if (ex.kg) cells += `<label>Kg${ex.kg === 'cada' ? ' cada' : ''}<input type="text" inputmode="decimal" data-p="days.${d}.kg.${ex.id}" value="${val(`days.${d}.kg.${ex.id}`)}" placeholder="${esc(prev(d, 'kg.' + ex.id))}"></label>`;
+      h += `<div class="ex" id="ex-${ex.id}">
+        <div class="row between"><span class="exname" data-tog="${ex.id}">${ex.n} <span class="mut">ⓘ</span></span><span class="toptag">${topTag(d, ex, w)}</span></div>
+        <div class="mut">${n} × ${range(ex)} · descanso ${ex.d} s</div>
+        <div class="dica">${ex.dica}<br><b>Progressão:</b> ${ex.prog}</div>
+        <input type="text" style="margin-top:8px" data-p="days.${d}.var.${ex.id}" value="${val(`days.${d}.var.${ex.id}`)}" placeholder="Variação usada${prev(d, 'var.' + ex.id) ? ' (antes: ' + esc(prev(d, 'var.' + ex.id)) + ')' : ' (opcional)'}">
+        <div class="sets">${cells}</div>
+        <div style="margin-top:8px"><button class="btn sm" data-timer="${ex.d}">⏱ Descanso ${ex.d} s</button></div></div>`;
     }
     h += `<div class="mut" style="margin-top:14px">Esforço do treino de força (Borg)</div>${chips(`days.${d}.borgF`, [1,2,3,4,5,6,7,8,9,10])}</div>`;
   }
@@ -315,9 +310,11 @@ function vHoje() {
   const r = runPlan(p.r, w);
   if (p.r === 'rec') {
     h += `<div class="card"><h2>🚲 ${r.nome}</h2><div class="mut">${r.det}</div>
-      <div style="margin-top:10px">${inp(`days.${d}.alt`, 'Minutos de bike/caminhada', '30-40')}</div></div>`;
+      <div style="margin-top:10px">${inp(`days.${d}.alt`, 'Minutos de bike/caminhada (opcional)', '20-30')}</div></div>`;
   } else {
-    h += `<div class="card"><h2>🏃 ${r.nome} — ${r.min} min correndo</h2><div class="mut">${r.det}</div>
+    const extra = p.opt ? ' <b>Quinta é opcional:</b> se não der pra correr, tudo bem — não conta na meta da semana.'
+      : wd(d) === 0 ? ' Se estiver cansado ou com alguma dor, troque por bike leve.' : '';
+    h += `<div class="card"><h2>🏃 ${r.nome}${p.opt ? ' (opcional)' : ''} — ${r.min} min correndo</h2><div class="mut">${r.det}${extra}</div>
       <div style="margin-top:10px"><button class="btn pri" data-blocks="${r.blocks.join(',')}" data-firm="${r.firm || 0}">▶ Timer do revezamento</button></div>
       <div class="mut" style="margin-top:6px;font-size:12px">O timer conta sua vez e a vez do amigo (mesmo tempo). Se ele terminar antes ou depois, use "Pular".</div>
       <div class="grid2" style="margin-top:10px">${inp(`days.${d}.run.min`, 'Minutos que você correu', r.min)}${inp(`days.${d}.run.km`, 'Km (opcional)', prev(d, 'run.km'))}</div>
@@ -352,8 +349,8 @@ function vSemana() {
   for (const d of ds) {
     const p = DAYMAP[wd(d)], r = runPlan(p.r, w), rm = runMin(d), past = d < t;
     const f = p.f ? (forcaFeita(d) ? '✅' : past ? '❌' : '⬜') + ' Treino ' + p.f : '';
-    const run = p.r === 'rec' ? (get(`days.${d}.alt`) ? `✅ 🚲 ${val(`days.${d}.alt`)} min` : '🚲 bike/caminhada')
-      : rm > 0 ? `✅ ${fmt(rm)} min` : (past ? '❌ ' : '') + `${r.nome} ${r.min}′`;
+    const run = p.r === 'rec' ? (get(`days.${d}.alt`) ? `✅ 🚲 ${val(`days.${d}.alt`)} min` : '<span class="mut">sem corrida</span>')
+      : rm > 0 ? `✅ ${fmt(rm)} min` : p.opt ? `<span class="mut">opcional · ${r.min}′</span>` : (past ? '❌ ' : '') + `${r.nome} ${r.min}′`;
     h += `<div class="day ${d === t ? 'today' : ''}" data-date="${d}"><div><b>${DIAS_C[wd(d)]}</b> <span class="mut">${br(d)}</span>${db.days[d]?.done ? ' ✔️' : ''}</div>
       <div class="r">${f ? f + '<br>' : ''}${run}</div></div>`;
   }
@@ -411,7 +408,7 @@ function vProg() {
     return `<tr><td>${w === 0 ? 'Início' : w}</td><td>${m.peso ? fmt(num(m.peso)) : '–'}</td><td>${m.cintura ? fmt(num(m.cintura)) : '–'}</td><td>${m.quadril ? fmt(num(m.quadril)) : '–'}</td><td><button class="btn sm" data-date="${sundayOf(w)}">editar</button></td></tr>`;
   }).join('')}</table></div>`;
   const ex = EXMAP[st.exHist];
-  h += `<div class="card"><h2>Evolução por exercício</h2><select id="exsel">${'ABC'.split('').map(L => `<optgroup label="Treino ${L}">${EX[L].ex.map(e => `<option value="${e.id}" ${e.id === st.exHist ? 'selected' : ''}>${e.n}</option>`).join('')}</optgroup>`).join('')}</select>
+  h += `<div class="card"><h2>Evolução por exercício</h2><select id="exsel">${'ABCD'.split('').map(L => `<optgroup label="Treino ${L}">${EX[L].ex.map(e => `<option value="${e.id}" ${e.id === st.exHist ? 'selected' : ''}>${e.n}</option>`).join('')}</optgroup>`).join('')}</select>
     <p class="mut">Meta: ${range(ex)} · topo da faixa = hora de progredir</p>
     <table><tr><th>Sem.</th><th>Séries</th><th>Kg</th><th>Variação</th></tr>${wk1.map(w => {
       const d = weekDates(w).find(x => DAYMAP[wd(x)].f === ex.L);
@@ -424,41 +421,41 @@ function vProg() {
 function vPlano() {
   let h = `<div class="card"><h2>📋 Semana típica</h2><table>
     <tr><th>Dia</th><th>Força</th><th>Corrida</th></tr>
-    <tr><td>Seg</td><td>A — Pernas e core</td><td>Revezamento leve</td></tr>
-    <tr><td>Ter</td><td>B — Parte de cima</td><td>Revezamento leve</td></tr>
-    <tr><td>Qua</td><td>—</td><td>Leve (S1-2) → <b>blocos firmes</b> (S3+)</td></tr>
-    <tr><td>Qui</td><td>C — Pernas de corredor</td><td>Revezamento leve</td></tr>
-    <tr><td>Sex</td><td>D — Cima + core</td><td>Revezamento leve</td></tr>
+    <tr><td>Seg</td><td>A — Pernas pesado + core</td><td>— (bike opcional)</td></tr>
+    <tr><td>Ter</td><td>B — Empurrar</td><td>Leve (S1-2) → <b>blocos firmes</b> (S3+)</td></tr>
+    <tr><td>Qua</td><td>C — Pernas de corredor + core</td><td>— (bike opcional)</td></tr>
+    <tr><td>Qui</td><td>—</td><td>Revezamento leve <span class="mut">(opcional)</span></td></tr>
+    <tr><td>Sex</td><td>D — Puxar</td><td>Revezamento leve</td></tr>
     <tr><td>Sáb</td><td>—</td><td><b>Bloco longo</b></td></tr>
-    <tr><td>Dom</td><td>Pesagem</td><td>🚲 Bike leve ou caminhada (sem corrida)</td></tr></table>
-    <p class="mut">Os dias mais pesados para as pernas (A, quarta, C e sábado) ficam a pelo menos 48 h um do outro.</p></div>`;
+    <tr><td>Dom</td><td>Pesagem</td><td>Revezamento leve curto</td></tr></table>
+    <p class="mut">As pernas pesadas ficam nos dias em que você não corre (segunda e quarta). Quinta é bônus: se não der, a semana continua completa.</p></div>`;
   h += `<div class="card"><h2>🏃 Corrida em revezamento</h2>
     <p>Você corre um bloco enquanto o amigo vai de bike, depois trocam. A bike é a sua recuperação: pedale leve.</p><ul>
     <li><b>Ponto de partida:</b> você aguenta ~1 km (uns 7-8 min). Os blocos começam abaixo disso, em 4 min, de propósito.</li>
     <li><b>Meta do ciclo:</b> na semana 8, correr ~28 min sem parar (uns 4 km).</li>
     <li><b>Blocos leves:</b> ritmo de conversa (Borg 4-5). Troque quando ainda daria pra correr mais um pouco — não espere morrer.</li>
-    <li><b>Blocos firmes (quarta, da semana 3 em diante):</b> mais rápido que o normal, Borg 7. Nunca tiro máximo.</li>
-    <li><b>Domingo sem corrida:</b> o fôlego melhora rápido, mas canela, joelho e tendões demoram mais pra se adaptar ao impacto.</li>
-    <li><b>Não pule etapas.</b> Se uma semana foi muito difícil ou apareceu dor, repita a semana.</li>
-    <li><b>Dias de perna (A e C):</b> força primeiro, corrida depois, ou em horários diferentes.</li></ul>
-    <table><tr><th>Sem.</th><th>Seg/Qui</th><th>Ter/Sex</th><th>Quarta</th><th>Sábado</th></tr>${CORRIDA.map((c, i) => `<tr><td>${i + 1}${i === 5 ? ' (leve)' : ''}</td><td>${c.curta.length}×${c.curta[0]}′</td><td>${c.media.length}×${c.media[0]}′</td><td>${c.qua.leve ? c.qua.leve.length + '×' + c.qua.leve[0] + '′ leve' : c.qua.aq + '′ + ' + c.qua.n + '×' + c.qua.t + '′ firme'}</td><td>${c.sab.join(' + ')}′</td></tr>`).join('')}</table>
+    <li><b>Blocos firmes (terça, da semana 3 em diante):</b> mais rápido que o normal, Borg 7. Nunca tiro máximo.</li>
+    <li><b>Não pule etapas.</b> Se uma semana foi muito difícil ou apareceu dor, repita a semana.</li></ul>
+    <table><tr><th>Sem.</th><th>Terça</th><th>Qui/Dom</th><th>Sexta</th><th>Sábado</th></tr>${CORRIDA.map((c, i) => `<tr><td>${i + 1}${i === 5 ? ' (leve)' : ''}</td><td>${c.firme.leve ? c.firme.leve.length + '×' + c.firme.leve[0] + '′ leve' : c.firme.aq + '′ + ' + c.firme.n + '×' + c.firme.t + '′ firme'}</td><td>${c.curta.length}×${c.curta[0]}′</td><td>${c.media.length}×${c.media[0]}′</td><td>${c.sab.join(' + ')}′</td></tr>`).join('')}</table>
     <p class="mut">Os números são minutos correndo em cada bloco. Entre um bloco e outro, bike enquanto o amigo corre.</p></div>`;
-  h += `<div class="card"><h2>💪 Força</h2><ul>
-    <li>Semanas 1-2: Borg 6-7 (sobram 3-4 repetições)</li><li>Semanas 3-5: Borg 7-8 (sobram 2-3)</li><li>Semana 6: leve, uma série a menos, Borg 6</li><li>Semanas 7-8: Borg 8 (sobram 1-2)</li></ul>
-    <p><b>Progressão:</b> bateu o topo da faixa em todas as séries com boa técnica → no próximo treino passe para a variação mais difícil ou ponha mais peso na mochila.</p>
-    <h3>Aquecimento (6-8 min)</h3><ul><li>Polichinelo ou corrida parada — 2 min</li><li>Mobilidade de quadril (90/90) — 10 por lado</li><li>Agachamento lento com pausa — 10</li><li>Gato-camelo + rotação torácica — 8 por lado</li><li>Flexão inclinada na mesa — 8</li></ul>
+  h += `<div class="card"><h2>💪 Força</h2>
+    <p class="mut">Equipamento: barra com anilhas (até ~20 kg), halteres (até ~9,5 kg cada) e barra fixa de porta. Nada de elástico: face pull virou crucifixo inverso, remada no elástico virou remada com halter, tríceps no elástico virou francês + mergulho.</p><ul>
+    <li>Semanas 1-2: Borg 6-7 (sobram 3-4 repetições), foco na técnica</li><li>Semanas 3-5: Borg 7-8 (sobram 2-3)</li><li>Semana 6: leve, uma série a menos, Borg 6</li><li>Semanas 7-8: Borg 8 (sobram 1-2)</li></ul>
+    <p><b>Progressão:</b> bateu o topo da faixa em todas as séries com boa técnica → no próximo treino ponha mais uma anilha de 1,5 kg por lado (ou halter mais pesado). Quando acabar a carga, use descida lenta (3 s) ou pausa no ponto mais difícil.</p>
+    <h3>Aquecimento (6-8 min)</h3><ul><li>Polichinelo ou corrida parada na garagem — 2 min</li><li>Mobilidade de quadril (90/90) — 10 por lado</li><li>Agachamento lento com pausa — 10</li><li>Gato-camelo + rotação torácica — 8 por lado</li><li>1 série leve do primeiro exercício com a barra vazia</li></ul>
     <h3>Volta à calma (5 min)</h3><p class="mut">Respiração lenta + alongamento leve de quadríceps, posteriores, glúteos, flexores de quadril e panturrilha (30 s cada).</p>`;
-  for (const L of 'ABC') h += `<h3>Treino ${L} — ${EX[L].nome}</h3><ul>${EX[L].ex.map(e => `<li><b>${e.n}</b> — ${e.s} × ${range(e)}<br><span class="mut">${e.dica}</span></li>`).join('')}</ul>`;
-  h += `<h3>Treino D — ${EX.D.nome}</h3><p class="mut">3-4 voltas, 90 s de descanso no fim de cada volta.</p><ul>${EX.D.ex.map(([n, r]) => `<li>${n} — ${r}</li>`).join('')}</ul></div>`;
+  for (const L of 'ABCD') h += `<h3>Treino ${L} — ${EX[L].nome}</h3><ul>${EX[L].ex.map(e => `<li><b>${e.n}</b> — ${e.s} × ${range(e)}<br><span class="mut">${e.dica}</span></li>`).join('')}</ul>`;
+  h += `</div>`;
   const pesoRef = num(db.settings.pesoRef) || [...Array(WEEKS + 1).keys()].reverse().map(w => num(db.weekly[w]?.peso)).find(v => !isNaN(v));
   h += `<div class="card"><h2>🍽️ Alimentação</h2>
-    <label>Seu peso (kg) para os cálculos<input type="text" inputmode="decimal" id="pesoRef" value="${pesoRef ? fmt(pesoRef) : ''}" placeholder="ex: 85"></label>
+    <label>Seu peso (kg) para os cálculos<input type="text" inputmode="decimal" id="pesoRef" value="${pesoRef ? fmt(pesoRef) : ''}" placeholder="ex: 68"></label>
     <div id="calcout" style="margin-top:10px">${calc(pesoRef)}</div>
     <ul>
     <li><b>Déficit moderado:</b> 300 a 400 kcal a menos do que gasta. Meta de perder 0,5 a 1% do peso por semana.</li>
-    <li><b>Proteína em toda refeição</b> (3-4 por dia): ovos, frango, carne, peixe, iogurte natural, queijo branco, feijão, lentilha, whey se for prático.</li>
-    <li><b>Não corte o carboidrato</b> — é o combustível da corrida. Concentre arroz, batata, mandioca, aveia, fruta e pão perto da corrida de quarta e do bloco longo de sábado.</li>
-    <li><b>Jejum:</b> ok para os revezamentos leves. Quarta e sábado: coma algo leve antes (banana, pão com mel, iogurte).</li>
+    <li><b>Proteína em toda refeição</b> (3-4 por dia): ovos, frango, carne, peixe, iogurte natural, queijo branco, feijão, lentilha, whey.</li>
+    <li><b>Creatina 5 g todo dia e whey depois do treino</b>, como você já faz: pode manter.</li>
+    <li><b>Não corte o carboidrato</b> — é o combustível da corrida. Concentre arroz, batata, mandioca, aveia, fruta e pão perto da corrida de terça e do bloco longo de sábado.</li>
+    <li><b>Jejum:</b> ok para os revezamentos leves. Terça e sábado: coma algo leve antes (banana, pão com mel, iogurte).</li>
     <li><b>Depois das corridas fortes:</b> proteína + carboidrato em até 2 h.</li>
     <li><b>Prato:</b> metade salada/legumes, ¼ proteína, ¼ carboidrato.</li>
     <li><b>Corte primeiro as calorias líquidas:</b> refrigerante, suco de caixinha, álcool, café muito adoçado.</li>
